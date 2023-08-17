@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import MammogramForm, HistopathologyForm, UltrasoundForm
+import os
+from django.conf import settings
 
 def index(request):
     return render(request, 'index.html')
@@ -20,7 +22,9 @@ def handle_upload(request, form_class):
         form = form_class(request.POST, request.FILES)
         if form.is_valid():
             file = form.cleaned_data['file']
-            # Process the file as needed
+            with open(os.path.join(settings.MEDIA_ROOT, file.name), 'wb+') as destination:
+                for chunk in file.chunks():
+                    destination.write(chunk)
             return JsonResponse({'message': 'File uploaded successfully'})
         else:
             return JsonResponse({'message': 'Invalid file'}, status=400)
