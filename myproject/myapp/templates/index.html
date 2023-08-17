@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyfline Demo of MVP</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div id="header" class="sticky-header">
+        <div class="logo-section">
+            <img src="{% static 'images/Lyfline-logo.svg' %}" alt="Lyfline" class="logo">
+        </div>
+        <div class="header-text">AI for a mission</div>
+    </div>
+    <div class="section section-blue">
+        Mammogram
+        <form action="{% url 'upload_mammogram' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label class="upload-section">
+                <input type="file" name="file" class="file-input" />
+                <div class="upload-text">Click to upload</div>
+                <div class="overlay">
+                    <img src="{% static 'images/upload.svg' %}" alt="Upload Icon" class="upload-icon" />
+                </div>
+            </label>
+            <input type="submit" value="Upload Mammogram">
+        </form>
+    </div>
+    <div class="section section-green">
+        Histopathology
+        <form action="{% url 'upload_histopathology' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label class="upload-section">
+                <input type="file" name="file" class="file-input" />
+                <div class="upload-text">Click to upload</div>
+                <div class="overlay">
+                    <img src="{% static 'images/upload.svg' %}" alt="Upload Icon" class="upload-icon" />
+                </div>
+            </label>
+            <input type="submit" value="Upload Histopathology">
+        </form>
+    </div>
+    <div class="section section-yellow">
+        Ultrasound
+        <form action="{% url 'upload_ultrasound' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label class="upload-section">
+                <input type="file" name="file" class="file-input" />
+                <div class="upload-text">Click to upload</div>
+                <div class="overlay">
+                    <img src="{% static 'images/upload.svg' %}" alt="Upload Icon" class="upload-icon" />
+                </div>
+            </label>
+            <input type="submit" value="Upload Ultrasound">
+        </form>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
